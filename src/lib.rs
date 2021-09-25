@@ -107,7 +107,7 @@ fn create_urls(raw: &Doujin, builder: &Make) -> Vec<String> {
         .pages
         .iter()
         .enumerate()
-        .map(|(i, v)| builder.page(&raw.media_id, i.try_into().unwrap(), &v.t))
+        .map(|(i, v)| builder.page(&raw.media_id, i as u32, &v.t))
         .collect()
 }
 

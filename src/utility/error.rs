@@ -83,5 +83,7 @@ impl From<num::ParseIntError> for HentaiError {
     }
 }
 
+impl std::error::Error for HentaiError {}
+
 /// Shorthand for Result<T, HentaiError> meant to make catching errors slightly more simple.
 pub type Result<T> = result::Result<T, HentaiError>;
