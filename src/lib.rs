@@ -59,7 +59,7 @@ pub(crate) mod utility;
 
 use chrono::{DateTime, Utc};
 use doujin::Doujin;
-use std::{convert::TryInto, path::PathBuf};
+use std::path::PathBuf;
 use utility::api::url::Make;
 
 pub use doujin::{Tag, Title};
