@@ -59,7 +59,7 @@ pub(crate) mod utility;
 
 use chrono::{DateTime, Utc};
 use doujin::Doujin;
-use std::{convert::TryInto, path::PathBuf};
+use std::path::PathBuf;
 use utility::api::url::Make;
 
 pub use doujin::{Tag, Title};
@@ -107,7 +107,7 @@ fn create_urls(raw: &Doujin, builder: &Make) -> Vec<String> {
         .pages
         .iter()
         .enumerate()
-        .map(|(i, v)| builder.page(&raw.media_id, i.try_into().unwrap(), &v.t))
+        .map(|(i, v)| builder.page(&raw.media_id, i as u32, &v.t))
         .collect()
 }
 

@@ -71,11 +71,9 @@ impl Doujin {
 
         let response = client
             .get(hyper::Uri::from_str(&url::doujin(id))?)
-            .await
-            .expect("Failed to request url");
+            .await?;
         let content = body::aggregate(response)
-            .await
-            .expect("Failed to aggregate body");
+            .await?;
         let result: Self = serde_json::from_reader(content.reader())?;
 
         Ok(result)
@@ -87,8 +85,7 @@ impl Doujin {
 
         let response = client
             .get(hyper::Uri::from_str("https://nhentai.xxx/random")?)
-            .await
-            .expect("Failed to request url");
+            .await?;
         let segments = response
             .headers()
             .get(hyper::header::LOCATION)
@@ -106,8 +103,8 @@ impl Doujin {
     }
 
     pub fn from_json(path: PathBuf) -> Result<Self> {
-        let data = fs::read_to_string(path).expect("Failed to read file");
-        let result: Self = serde_json::from_str(&data).expect("Failed to deserialize json");
+        let data = fs::read_to_string(path)?;
+        let result: Self = serde_json::from_str(&data)?;
 
         Ok(result)
     }

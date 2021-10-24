@@ -25,13 +25,11 @@ impl Search {
 
         let response = client
             .get(hyper::Uri::from_str(&url)?)
-            .await
-            .expect("Failed to request url");
+            .await?;
         let content = body::aggregate(response)
-            .await
-            .expect("Failed to aggregate body");
+            .await?;
         let result: Self =
-            serde_json::from_reader(content.reader()).expect("Failed to deserialize json");
+            serde_json::from_reader(content.reader())?;
 
         Ok(result)
     }
